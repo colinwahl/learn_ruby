@@ -8,11 +8,19 @@ def shout(string)
 end
 
 def repeat(string, n)
-  return string * n * " "
+  final = string
+  if n == 1
+    return final
+  else
+    (n-1).times do 
+      final = final + " " + string
+    end
+  end
+  return final
 end
 
 def start_of_word(string, n)
-  return string[0..n]
+  return string[0..n-1]
 end
 
 def first_word(string)
@@ -21,12 +29,17 @@ def first_word(string)
 end
 
 def titleize(string)
+  puncs = ["and", "the", "to", "of", "by", "from", "or", "over"]
   array = string.split(" ")
-  array.each do |t|
-    if(t == "a" || "the" || "of" || "on" || "upon" || "in" || "with" || "an" || "but" || "and" || "or")
-      continue
+  array.map! do |x|
+    if x == array[0]
+      x.capitalize
+    elsif puncs.include? x.downcase
+      x.downcase
+    else
+      x.capitalize
     end
-    t.capitalize
   end
-  return array.join()
+  return array.join(" ")
 end
+
